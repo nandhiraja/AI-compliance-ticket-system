@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify, redirect ,render_template
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -103,10 +103,12 @@ def signup():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/api/auth/login', methods=['POST'])
+@app.route('/api/auth/login', methods=["GET","POST"])
 def login():
     """User login"""
     try:
+        if request.method == "GET":
+            return render_template("login.html")
         data = request.get_json()
         
         # Validate input
@@ -146,7 +148,7 @@ def login():
 
 @app.route('/api/tickets/create', methods=['POST'])
 @jwt_required()
-def create_ticket():
+def create_ticket_user():
     """Create a new ticket with AI prediction"""
     try:
         user_id = int(get_jwt_identity())  # CONVERT BACK TO INT
@@ -353,7 +355,8 @@ def health_check():
 
 @app.route('/')
 def index():
-    return redirect('http://127.0.0.1:5500/frontend/home.html')
+    # return redirect('http://127.0.0.1:5500/frontend/home.html')
+    return render_template('home.html')
 
 # ============================================================================
 # ADMIN ROUTES
@@ -544,6 +547,49 @@ def admin_delete_user(user_id):
         print(f"❌ Error deleting user: {e}")
         return jsonify({'error': str(e)}), 500
 
+
+
+
+
+## add enpoint for missing pages
+
+@app.route('/api/auth/history')
+def history():
+    return render_template('history.html')
+
+@app.route('/api/auth/settings')
+def settings():
+    return render_template('settings.html')
+
+# dashboard
+@app.route('/api/auth/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+# remaining pages
+@app.route('/api/auth/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/api/auth/create_ticket')
+def create_ticket():
+    return render_template('create_ticket.html')
+
+@app.route('/api/auth/progress')
+def progress():
+    return render_template('progress.html')
+
+@app.route('/api/auth/home')
+def home():
+    return render_template('home.html')
+
+@app.route('/api/auth/admin_login')
+def admin_login():
+    return render_template('admin_login.html')
+
+@app.route('/api/auth/admin_dashboard')
+def admin_dashboard():
+    return render_template('admin_dashboard.html')
 
 # ============================================================================
 # RUN SERVER

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Ticket System</title>
+    <!-- <link rel="stylesheet" href="css/admin-login.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h1>Admin Panel</h1>
+            <p class="subtitle">Enter admin credentials to continue</p>
+
+            <!-- Alert Box -->
+            <div id="alertBox" class="alert" style="display: none;"></div>
+
+            <!-- Admin Login Form -->
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        placeholder="admin" 
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Enter password" 
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <span id="btnText">Sign In</span>
+                </button>
+            </form>
+
+            <div class="footer-text">
+                <a href="{{url_for('home')}}">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script type="module" src="js/admin-login.js"></script> -->
+    <script type="module" src="{{ url_for('static', filename='js/admin-login.js') }}"></script>
+</body>
+</html>
