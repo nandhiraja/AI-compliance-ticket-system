@@ -32,7 +32,7 @@ toggleBtn.addEventListener('click', () => {
 document.getElementById('logoutBtn').addEventListener('click', () => {
     if (confirm('Are you sure you want to logout?')) {
         localStorage.clear();
-        window.location.href = 'home.html';
+        window.location.href = 'home';
     }
 });
 

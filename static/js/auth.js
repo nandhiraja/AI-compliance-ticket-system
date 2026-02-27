@@ -27,7 +27,7 @@ function showAlert(message, type) {
     alertBox.textContent = message;
     alertBox.className = `alert ${type}`;
     alertBox.style.display = 'block';
-
+    
     // Auto-hide after 5 seconds
     setTimeout(() => {
         alertBox.style.display = 'none';
@@ -37,33 +37,33 @@ function showAlert(message, type) {
 // ==================== LOGIN HANDLER ====================
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
     const rememberMe = document.getElementById('rememberMe').checked;
-
+    
     // ==================== CHECK IF ADMIN ====================
     // Admin credentials: username = "admin", password = "123456"
     if (email === 'admin' && password === '123456') {
         // Admin login
         localStorage.setItem('adminToken', 'admin_authenticated');
         localStorage.setItem('adminUser', 'Administrator');
-
+        
         showAlert('Admin login successful! Redirecting...', 'success');
-
+        
         setTimeout(() => {
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = 'admin-dashboard';
         }, 1000);
         return;
     }
-
+    
     // ==================== REGULAR USER LOGIN ====================
     // Disable button during request
     const submitBtn = loginForm.querySelector('.btn-primary');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<span>Signing in...</span>';
     submitBtn.disabled = true;
-
+    
     try {
         const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
@@ -72,23 +72,23 @@ loginForm.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify({ email, password })
         });
-
+        
         const data = await response.json();
-
+        
         if (response.ok) {
             // Store token and user info
             localStorage.setItem('token', data.access_token);
             localStorage.setItem('user', JSON.stringify(data.user));
-
+            
             if (rememberMe) {
                 localStorage.setItem('rememberMe', 'true');
             }
-
+            
             showAlert('Login successful! Redirecting...', 'success');
-
+            
             // Redirect to dashboard after 1 second
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'dashboard';
             }, 1000);
         } else {
             showAlert(data.error || 'Login failed. Please try again.', 'error');
@@ -106,23 +106,23 @@ loginForm.addEventListener('submit', async (e) => {
 // ==================== SIGNUP HANDLER ====================
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    
     const name = document.getElementById('signupName').value;
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
-
+    
     // Basic validation
     if (password.length < 6) {
         showAlert('Password must be at least 6 characters long.', 'error');
         return;
     }
-
+    
     // Disable button during request
     const submitBtn = signupForm.querySelector('.btn-primary');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<span>Creating account...</span>';
     submitBtn.disabled = true;
-
+    
     try {
         const response = await fetch(`${API_URL}/auth/signup`, {
             method: 'POST',
@@ -131,19 +131,19 @@ signupForm.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify({ name, email, password })
         });
-
+        
         const data = await response.json();
-
+        
         if (response.ok) {
             // Store token and user info
             localStorage.setItem('token', data.access_token);
             localStorage.setItem('user', JSON.stringify(data.user));
-
+            
             showAlert('Account created successfully! Redirecting...', 'success');
-
+            
             // Redirect to dashboard after 1 second
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'dashboard';
             }, 1000);
         } else {
             showAlert(data.error || 'Signup failed. Please try again.', 'error');
@@ -162,7 +162,7 @@ signupForm.addEventListener('submit', async (e) => {
 window.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const adminToken = localStorage.getItem('adminToken');
-
+    
     if (adminToken === 'admin_authenticated') {
         // Admin is logged in, redirect to admin dashboard
         window.location.href = 'admin-dashboard';

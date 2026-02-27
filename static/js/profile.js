@@ -6,7 +6,7 @@ const user = JSON.parse(localStorage.getItem('user') || '{}');
 
 // Check authentication
 if (!token) {
-    window.location.href = 'login.html';
+    window.location.href = 'login';
 }
 
 // Initialize page
@@ -221,5 +221,5 @@ function formatDate(dateString) {
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = 'home.html';
+    window.location.href = 'home';
 }

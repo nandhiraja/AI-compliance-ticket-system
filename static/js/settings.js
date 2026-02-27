@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function checkAuth() {
     const token = localStorage.getItem('token');
     if (!token) {
-        window.location.href = 'login.html';
+        window.location.href = 'login';
     }
 }
 
@@ -334,7 +334,7 @@ async function deleteAccount() {
         localStorage.clear();
         
         // Redirect to login
-        window.location.href = 'home.html';
+        window.location.href = 'home';
     } catch (error) {
         console.error('Error:', error);
         showToast('Failed to delete account', 'error');
@@ -404,7 +404,7 @@ function showToast(message, type = 'success') {
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    window.location.href = 'home.html';
+    window.location.href = 'home';
 }
 
 // ==================== KEYBOARD SHORTCUTS ====================
