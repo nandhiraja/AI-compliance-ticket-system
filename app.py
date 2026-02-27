@@ -595,20 +595,26 @@ def admin_dashboard():
 # RUN SERVER
 # ============================================================================
 
-if __name__ == '__main__':
-    print("\n" + "="*60)
-    print("🚀 TICKET SYSTEM BACKEND SERVER")
-    print("="*60)
-    print("📍 Server running on: http://127.0.0.1:5000")
-    print("🤖 AI Models: Loaded")
-    print("🗄️  Database: Connected")
-    print("="*60 + "\n")
+# if __name__ == '__main__':
+#     print("\n" + "="*60)
+#     print("🚀 TICKET SYSTEM BACKEND SERVER")
+#     print("="*60)
+#     print("📍 Server running on: http://127.0.0.1:5000")
+#     print("🤖 AI Models: Loaded")
+#     print("🗄️  Database: Connected")
+#     print("="*60 + "\n")
     
-    # For local development
-    app.run(debug=True, port=5000)
-else:
-    # For production (Render, Heroku, etc.)
-    import os
-    port = int(os.environ.get('PORT', 5000))
-    # App runs via gunicorn in production
-    app.run(host="0.0.0.0", port=port, debug=True)
+#     # For local development
+#     app.run(debug=True, port=5000)
+# else:
+#     # For production (Render, Heroku, etc.)
+#     import os
+#     port = int(os.environ.get('PORT', 5000))
+#     # App runs via gunicorn in production
+#     app.run(host="0.0.0.0", port=port, debug=True)
+
+if __name__ == "__main__":
+    # Get port from environment variable (Render provides this)
+    # Default to 10000 if not found
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
