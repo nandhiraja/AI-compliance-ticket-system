@@ -7,7 +7,7 @@ const user = JSON.parse(localStorage.getItem('user') || '{}');
 
 if (!token) {
     // Not logged in, redirect to login
-    window.location.href = 'login.html';
+    window.location.href = 'login';
 }
 
 // ==================== LOAD USER INFO ====================
@@ -32,7 +32,7 @@ toggleBtn.addEventListener('click', () => {
 document.getElementById('logoutBtn').addEventListener('click', () => {
     if (confirm('Are you sure you want to logout?')) {
         localStorage.clear();
-        window.location.href = 'home.html';
+        window.location.href = 'home';
     }
 });
 

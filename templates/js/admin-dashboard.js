@@ -2,7 +2,7 @@
 import API_URL from './config.js';// ==================== CHECK AUTHENTICATION ====================
 const adminToken = localStorage.getItem('adminToken');
 if (!adminToken || adminToken !== 'admin_authenticated') {
-    window.location.href = 'home.html';  // ✅ FIXED: Changed from login.html
+    window.location.href = 'home';  // ✅ FIXED: Changed from login.html
 }
 
 // ==================== GLOBAL VARIABLES ====================
@@ -453,7 +453,7 @@ function logout() {
     if (confirm('Are you sure you want to logout?')) {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('adminUser');
-        window.location.href = 'home.html';  // ✅ Already correct
+        window.location.href = 'home';  // ✅ Already correct
     }
 }
 

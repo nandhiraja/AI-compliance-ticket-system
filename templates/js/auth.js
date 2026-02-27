@@ -52,7 +52,7 @@ loginForm.addEventListener('submit', async (e) => {
         showAlert('Admin login successful! Redirecting...', 'success');
         
         setTimeout(() => {
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = 'admin-dashboard';
         }, 1000);
         return;
     }
@@ -88,7 +88,7 @@ loginForm.addEventListener('submit', async (e) => {
             
             // Redirect to dashboard after 1 second
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'dashboard';
             }, 1000);
         } else {
             showAlert(data.error || 'Login failed. Please try again.', 'error');
@@ -143,7 +143,7 @@ signupForm.addEventListener('submit', async (e) => {
             
             // Redirect to dashboard after 1 second
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'dashboard';
             }, 1000);
         } else {
             showAlert(data.error || 'Signup failed. Please try again.', 'error');
@@ -165,9 +165,9 @@ window.addEventListener('DOMContentLoaded', () => {
     
     if (adminToken === 'admin_authenticated') {
         // Admin is logged in, redirect to admin dashboard
-        window.location.href = 'admin-dashboard.html';
+        window.location.href = 'admin-dashboard';
     } else if (token) {
         // User is already logged in, redirect to dashboard
-        window.location.href = 'dashboard.html';
+        window.location.href = 'dashboard';
     }
 });
